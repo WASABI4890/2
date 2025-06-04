@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Российские операционные системы</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      height: 100%;
+    }
+    header {
+      background-color: #0d4a28;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+    }
+    header img {
+      height: 60px;
+      margin-right: 20px;
+    }
+    header h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+    nav {
+      background-color: #0c3c1e;
+    }
+    nav button {
+      background: none;
+      border: none;
+      color: white;
+      padding: 14px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    nav button:hover {
+      background-color: #145c32;
+    }
+    .content {
+      padding: 20px;
+    }
+    footer {
+      background-color: #0d4a28;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 600px;
+    }
+    th, td {
+      border: 1px solid #0c3c1e;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #0c3c1e;
+      color: white;
+    }
+    .os-images img {
+      max-width: 100%;
+      max-height: 300px;
+    }
+    #map {
+      width: 100%;
+      height: 300px;
+      margin-top: 20px;
+    }
+  </style>
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    function initMap() {
+      if (typeof ymaps === 'undefined') return;
+      ymaps.ready(function () {
+        var map = new ymaps.Map("map", {
+          center: [47.217831, 39.709075],
+          zoom: 10
+        });
+        var address = "г. Москва, ул. Примерная, д. 10";
+        ymaps.geocode(address).then(function (res) {
+          var firstGeoObject = res.geoObjects.get(0);
+          firstGeoObject.options.set('preset', 'islands#redIcon');
+          map.geoObjects.add(firstGeoObject);
+          map.setCenter(firstGeoObject.geometry.getCoordinates(), 16);
+        });
+      });
+    }
+  </script>
+</head>
+<body onload="showTab('index'); initMap();">
+  <header>
+    <img src="1.png" alt="Герб ФТС">
+    <h1>Российские операционные системы</h1>
+  </header>
+
+  <nav>
+    <button onclick="showTab('index')">Главная</button>
+    <button onclick="showTab('astra')">Астра Линукс</button>
+    <button onclick="showTab('kontakt')">Контакты</button>
+  </nav>
+
+  <div class="content">
+    <div id="index" class="tab-content active">
+      <h2>Российские операционные системы</h2>
+      <p>Российские операционные системы — это программные платформы... (содержимое index.html)</p>
+      <!-- можно вставить сокращённую или полную версию index.html -->
+    </div>
+
+    <div id="astra" class="tab-content">
+      <h2>Операционная система Астра Линукс</h2>
+      <img class="logo-after-title" src="logo astra.png" alt="Логотип Астра Линукс">
+      <p><strong>Астра Линукс</strong> — российская операционная система... (содержимое astra.html)</p>
+      <div class="os-images">
+        <img src="desktop astra.png" alt="Рабочий стол Астра Линукс">
+      </div>
+    </div>
+
+    <div id="kontakt" class="tab-content">
+      <h2>Контактная информация</h2>
+      <table>
+        <tr><th>Отдел</th><th>Телефон</th><th>Email</th></tr>
+        <tr><td>Техническая поддержка</td><td>+7 (495) 123-45-67</td><td>support@ros-os.ru</td></tr>
+        <tr><td>Отдел продаж</td><td>+7 (495) 234-56-78</td><td>sales@ros-os.ru</td></tr>
+        <tr><td>Общие вопросы</td><td>+7 (495) 345-67-89</td><td>info@ros-os.ru</td></tr>
+      </table>
+      <h3>Адрес офиса</h3>
+      <p>г. Ростов-на-Дону, Будённовский проспект д.20</p>
+      <h3>Карта проезда</h3>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Российские Операционные Системы
+  </footer>
+</body>
+</html>

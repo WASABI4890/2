@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Контакты</title>
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+  <script type="text/javascript">
+    ymaps.ready(init);
+    function init(){
+      var myMap = new ymaps.Map("map", {
+          center: [47.217831, 39.709075], 
+          zoom: 10
+      });
+
+      var address = "г. Москва, ул. Примерная, д. 10";
+      ymaps.geocode(address).then(function (res) {
+          var firstGeoObject = res.geoObjects.get(0);
+          firstGeoObject.options.set('preset', 'islands#redIcon');
+          myMap.geoObjects.add(firstGeoObject);
+          myMap.setCenter(firstGeoObject.geometry.getCoordinates(), 16);
+      });
+    }
+  </script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0; padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background-color: #0d4a28;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+    }
+    header img {
+      height: 60px;
+      margin-right: 20px;
+    }
+    header h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+    nav {
+      background-color: #0c3c1e;
+      overflow: hidden;
+    }
+    nav a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+    nav a:hover {
+      background-color: #145c32;
+    }
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+    footer {
+      background-color: #0d4a28;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 600px;
+    }
+    th, td {
+      border: 1px solid #0c3c1e;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #0c3c1e;
+      color: white;
+    }
+    #map {
+      width: 100%;
+      height: 300px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="1.png" alt="Герб ФТС" />
+    <h1>Контакты</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Главная</a>
+    <a href="alt.html">Альт Линукс</a>
+    <a href="astra.html">Астра Линукс</a>
+    <a href="redos.html">РЭД ОС</a>
+    <a href="kontakt.html">Контакты</a>
+  </nav>
+
+  <div class="content">
+    <h2>Контактная информация</h2>
+    <p>Если у вас есть вопросы или предложения, свяжитесь с нами:</p>
+
+    <table>
+      <tr>
+        <th>Отдел</th>
+        <th>Телефон</th>
+        <th>Email</th>
+      </tr>
+      <tr>
+        <td>Техническая поддержка</td>
+        <td>+7 (495) 123-45-67</td>
+        <td>support@ros-os.ru</td>
+      </tr>
+      <tr>
+        <td>Отдел продаж</td>
+        <td>+7 (495) 234-56-78</td>
+        <td>sales@ros-os.ru</td>
+      </tr>
+      <tr>
+        <td>Общие вопросы</td>
+        <td>+7 (495) 345-67-89</td>
+        <td>info@ros-os.ru</td>
+      </tr>
+    </table>
+
+    <h3>Адрес офиса</h3>
+    <p>г. Ростов-на-Дону, Будённовский проспект д.20</p>
+
+    <h3>Карта проезда</h3>
+    <div id="map"></div>
+  </div>
+
+  <footer>
+    &copy; 2025 Российские Операционные Системы
+  </footer>
+</body>
+</html>
